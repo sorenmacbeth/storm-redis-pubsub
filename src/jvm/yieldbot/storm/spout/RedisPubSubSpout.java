@@ -75,13 +75,13 @@ public class RedisPubSubSpout implements IRichSpout {
 				}
 
 				@Override
-				public void onSubscribe(String arg0, int arg1) {
+				public void onSubscribe(String channel, int subscribedChannels) {
 					// TODO Auto-generated method stub
 					
 				}
 
 				@Override
-				public void onUnsubscribe(String arg0, int arg1) {
+				public void onUnsubscribe(String channel, int subscribedChannels) {
 					// TODO Auto-generated method stub
 					
 				}
@@ -104,51 +104,6 @@ public class RedisPubSubSpout implements IRichSpout {
 		ListenerThread listener = new ListenerThread(queue,pool,pattern);
 		listener.start();
 		
-		/*JedisPubSub listener = new JedisPubSub() {
-
-			@Override
-			public void onMessage(String channel, String message) {
-				queue.offer(message);
-				LOG.debug("got message: " + message);
-			}
-
-			@Override
-			public void onPMessage(String pattern, String channel, String message) {
-				queue.offer(message);
-				LOG.debug("got message: " + message);
-			}
-
-			@Override
-			public void onPSubscribe(String channel, int subscribedChannels) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onPUnsubscribe(String channel, int subscribedChannels) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSubscribe(String arg0, int arg1) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onUnsubscribe(String arg0, int arg1) {
-				// TODO Auto-generated method stub
-				
-			}
-		};
-		
-		Jedis jedis = pool.getResource();
-		try {
-			jedis.subscribe(listener, pattern);
-		} finally {
-			pool.returnResource(jedis);
-		}*/
 	}
 
 	public void close() {
