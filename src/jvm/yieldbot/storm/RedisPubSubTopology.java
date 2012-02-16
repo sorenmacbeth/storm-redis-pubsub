@@ -13,9 +13,8 @@ public class RedisPubSubTopology {
         String pattern = args[2];
         TopologyBuilder builder = new TopologyBuilder();
         
-        builder.setSpout(1, new RedisPubSubSpout(host,port,pattern));
+        builder.setSpout("pubsub1", new RedisPubSubSpout(host,port,pattern));
                 
-        
         Config conf = new Config();
         conf.setDebug(true);
         
@@ -23,8 +22,8 @@ public class RedisPubSubTopology {
         LocalCluster cluster = new LocalCluster();
         
         cluster.submitTopology("test", conf, builder.createTopology());
-        
         Utils.sleep(10000);
+        cluster.killTopology("test");
         cluster.shutdown();
     }
 }
